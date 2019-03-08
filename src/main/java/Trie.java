@@ -31,6 +31,7 @@ public class Trie {
 
             current = child;
         }
+        current.setTerminal(true);
     }
 
     public boolean contains(String potentialWord) {
@@ -48,6 +49,21 @@ public class Trie {
         return current.isTerminal();
     }
 
+    void remove(String word) {
+        removeHelper(trie.getRoot(), word);
+    }
+
+    boolean removeHelper(EntryNode node, String word) {
+        EntryNode child;
+        for(int i = 0; i < word.length(); i++) {
+            char character = word.charAt(i);
+            child = node.getChild(character);
+        }
+        if(child.isTerminal()){
+
+        }
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("src/main/resources/dictionary.txt"));
         List<String> words = new ArrayList<>();
@@ -59,6 +75,7 @@ public class Trie {
         Trie trie = new Trie();
         trie.addWords(words);
         trie.printTrie();
+        trie.remove("by");
 
         System.out.println();
         System.out.println("This test should report false:");
